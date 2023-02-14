@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Outfit:wght@400;700&display=swap');
+
+h1 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 64px;
+    font-weight: bold;
+}
+
+#heroCont {
+    height: 186px;
+    background-color: #009FFD;
+    margin-bottom: 70px;
+}
+
+#heroTxt {
+    color: white;
+}
+
+#submitBudgBtn {
+    margin-left: 20px;
+}
+
+.expRow {
+    margin-top: 20px;
+}
+
+.delBtn {
+    height: 25px;
+    /* width: 25px; */
+    font-size: 15px;
+    line-height: 0;
+    margin-top: -5px;
+}
