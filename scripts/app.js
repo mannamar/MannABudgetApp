@@ -112,8 +112,15 @@ function populateTotalExp() {
     resultTxt.textContent = `Your budget is exactly equal to your monthly expenses`;
     if (data.totalExp < data.budget) {
         resultTxt.textContent = `You are $${data.budget - data.totalExp} under your monthly budget`;
+        resultTxt.classList.add('green');
+        resultTxt.classList.remove('red');
     } else if (data.totalExp > data.budget) {
         resultTxt.textContent = `You are $${data.totalExp - data.budget} over your monthly expenses`;
+        resultTxt.classList.add('red');
+        resultTxt.classList.remove('green');
+    } else {
+        resultTxt.classList.remove('red');
+        resultTxt.classList.remove('green');
     }
 }
 

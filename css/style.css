@@ -6,14 +6,27 @@ h1 {
     font-weight: bold;
 }
 
+h2 {
+    padding-top: 40px;
+}
+
+h5 {
+    margin-bottom: 0px;
+    margin-top: 10px;
+}
+
 #heroCont {
-    height: 186px;
+    min-height: 186px;
     background-color: #009FFD;
-    margin-bottom: 70px;
+    /* margin-bottom: 70px; */
 }
 
 #heroTxt {
     color: white;
+}
+
+#pageCont {
+    max-width: 1000px
 }
 
 #submitBudgBtn {
@@ -21,7 +34,7 @@ h1 {
 }
 
 .expRow {
-    margin-top: 20px;
+    margin-top: 5px;
 }
 
 .delBtn {
@@ -34,4 +47,29 @@ h1 {
 
 #expNameInp {
     text-transform: capitalize;
+}
+
+#expNameInp,
+#expAmtInp {
+    max-width: 90%;
+}
+
+.green {
+    color: green;
+}
+
+.red {
+    color: red;
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 40px;
+        /* line-height: 0px; */
+        margin-bottom: 0;
+    }
+
+    #heroCont {
+        min-height: 100px;
+    }
 }
