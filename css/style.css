@@ -62,6 +62,10 @@ h5 {
     color: red;
 }
 
+#myChart {
+    padding-top: 30px;
+}
+
 @media (max-width: 768px) {
     h1 {
         font-size: 40px;

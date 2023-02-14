@@ -1,3 +1,8 @@
+// Amardeep Mann
+// 2-14-23
+// Budget App
+// We made a fully functional budgeting app for desktop and mobile that keeps track of your monthly budget and expenses
+
 import { saveToLocalStorage, getLocalStorage } from "./localStorage.js";
 
 let data = getLocalStorage();
@@ -33,6 +38,11 @@ function calcAndPopulate() {
     calcExpenses();
     populateTotalExp();
     saveToLocalStorage(data);
+    if (data.expenses.length > 0) {
+        makeChart();
+    } else {
+        
+    }
 };
 
 addExpBtn.addEventListener('click', addExpense);
@@ -124,6 +134,44 @@ function populateTotalExp() {
     }
 }
 
+function makeChart() {
+    // let xValues = ["Food", "Rent", "Cat"];
+    // let yValues = [200, 1000, 5000];
+    // let barColors = [
+    // "#b91d47",
+    // "#00aba9",
+    // "#2b5797"
+    // ];
+
+    let xValues = [];
+    let yValues = [];
+    let barColors = [];
+
+    for (let i = 0; i < data.expenses.length; i++) {
+        let randomColor ='#' + (Math.random()*0xFFFFFF<<0).toString(16);
+        xValues.push(data.expenses[i].name);
+        yValues.push(parseInt(data.expenses[i].amount));
+        barColors.push(randomColor);
+    };
+
+    new Chart("myChart", {
+        type: "pie",
+        data: {
+            labels: xValues,
+            datasets: [{
+            backgroundColor: barColors,
+            data: yValues
+            }]
+        },
+        options: {
+            title: {
+            display: true,
+            text: "Expenses Breakdown"
+            }
+        }
+    });
+}
+
 // Populate fields at page start
 calcAndPopulate();
 if (data.budget) {
@@ -132,4 +180,8 @@ if (data.budget) {
 enterBudgInput.value = data.budget;
 if (enterBudgInput.value) {
     submitBudgBtn.textContent = 'Update';
+}
+
+if (data.expenses.length > 0) {
+    makeChart();
 }
