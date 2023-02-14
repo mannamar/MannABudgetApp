@@ -16,9 +16,9 @@ function getLocalStorage() {
 
     if (localStorageData === null) {
         return {
-            toDo: [],
-            inPro: [],
-            comp: []
+            budget: null,
+            expenses: [],
+            totalExp: 0
         };
     }
 

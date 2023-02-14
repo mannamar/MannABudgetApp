@@ -1,10 +1,6 @@
 import { saveToLocalStorage, getLocalStorage } from "./localStorage.js";
 
-let data = {
-    budget: 0,
-    expenses: [],
-    totalExp: 0
-};
+let data = getLocalStorage();
 
 let enterBudgInput = document.getElementById('enterBudgInput');
 let submitBudgBtn = document.getElementById('submitBudgBtn');
@@ -15,33 +11,60 @@ let expAmtInp = document.getElementById('expAmtInp');
 let addExpBtn = document.getElementById('addExpBtn');
 let expCont = document.getElementById('expCont');
 
-submitBudgBtn.addEventListener('click', function() {
-    budgTxt.textContent = `Your budget: $${enterBudgInput.value}`;
-    data.budget = parseInt(enterBudgInput.value);
-    console.log(data);
-    populateTotalExp();
-    submitBudgBtn.textContent = 'Update';
+submitBudgBtn.addEventListener('click', submit);
+enterBudgInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        submit();
+    }
 });
 
-addExpBtn.addEventListener('click', function() {
+function submit() {
+    if (enterBudgInput.value) {
+        budgTxt.textContent = `Your budget: $${enterBudgInput.value}`;
+        data.budget = parseInt(enterBudgInput.value);
+        console.log(data);
+        populateTotalExp();
+        submitBudgBtn.textContent = 'Update';
+    }
+}
+
+function calcAndPopulate() {
+    populateExpenses();
+    calcExpenses();
+    populateTotalExp();
+    saveToLocalStorage(data);
+};
+
+addExpBtn.addEventListener('click', addExpense);
+expNameInp.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        addExpense();
+    }
+});
+expAmtInp.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        addExpense();
+    }
+});
+
+function addExpense() {
     if (expNameInp.value && expAmtInp.value) {
         let expense = {
-            name: expNameInp.value,
+            name: (expNameInp.value[0].toUpperCase() + expNameInp.value.slice(1)),
             amount: expAmtInp.value
         }
         data.expenses.push(expense);
         console.log(data);
-        populateExpenses();
-        calcExpenses();
-        populateTotalExp();
+        calcAndPopulate();
         expNameInp.value = '';
         expAmtInp.value = '';
+        expNameInp.focus();
     }
-});
+}
 
 function populateExpenses() {
+    // data.expenses.sort( (item1, item2) => item2.amount - item1.amount);
     let expenses = data.expenses;
-    console.log(expenses);
     expCont.innerHTML = '';
     for (let i = 0; i < expenses.length; i++) {
         let thisExpense = expenses[i];
@@ -63,9 +86,7 @@ function populateExpenses() {
         btn.type = 'button';
         btn.addEventListener('click', function() {
             data.expenses.splice(i, 1);
-            populateExpenses();
-            calcExpenses();
-            populateTotalExp();
+            calcAndPopulate();
         });
 
         col1.append(name);
@@ -83,7 +104,6 @@ function calcExpenses() {
         let thisExp = expenses[i];
         totalExp += parseInt(thisExp.amount);
     }
-    console.log(totalExp);
     data.totalExp = totalExp;
 }
 
@@ -95,4 +115,14 @@ function populateTotalExp() {
     } else if (data.totalExp > data.budget) {
         resultTxt.textContent = `You are $${data.totalExp - data.budget} over your monthly expenses`;
     }
+}
+
+// Populate fields at page start
+calcAndPopulate();
+if (data.budget) {
+    budgTxt.textContent = `Your budget: $${data.budget}`;
+}
+enterBudgInput.value = data.budget;
+if (enterBudgInput.value) {
+    submitBudgBtn.textContent = 'Update';
 }

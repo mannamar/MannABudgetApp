@@ -31,3 +31,7 @@ h1 {
     line-height: 0;
     margin-top: -5px;
 }
+
+#expNameInp {
+    text-transform: capitalize;
+}
