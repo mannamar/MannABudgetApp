@@ -7,7 +7,7 @@ h1 {
 }
 
 h2 {
-    padding-top: 40px;
+    padding-top: 50px;
 }
 
 h5 {
@@ -77,6 +77,6 @@ h5 {
     }
 
     #heroCont {
-        min-height: 100px;
+        min-height: 150px;
     }
 }

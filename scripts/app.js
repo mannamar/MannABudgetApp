@@ -6,6 +6,7 @@
 import { saveToLocalStorage, getLocalStorage } from "./localStorage.js";
 
 let data = getLocalStorage();
+let pieChart;
 
 let enterBudgInput = document.getElementById('enterBudgInput');
 let submitBudgBtn = document.getElementById('submitBudgBtn');
@@ -42,9 +43,10 @@ function calcAndPopulate() {
     if (data.expenses.length > 0) {
         makeChart();
     } else {
-        // Why this no work????
-        let context = myChart.getContext('2d');
-        context.clearRect(0, 0, canvas.width, canvas.height);
+        // Destroy!!! pie CHart if no values
+        if (pieChart) {
+            pieChart.destroy();
+        }
     }
 };
 
@@ -67,7 +69,6 @@ function addExpense() {
             amount: expAmtInp.value
         }
         data.expenses.push(expense);
-        console.log(data);
         calcAndPopulate();
         expNameInp.value = '';
         expAmtInp.value = '';
@@ -157,7 +158,7 @@ function makeChart() {
         barColors.push(randomColor);
     };
 
-    new Chart("myChart", {
+    pieChart = new Chart("myChart", {
         type: "pie",
         data: {
             labels: xValues,
