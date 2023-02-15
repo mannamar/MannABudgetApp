@@ -129,7 +129,7 @@ function populateTotalExp() {
         resultTxt.classList.add('green');
         resultTxt.classList.remove('red');
     } else if (data.totalExp > data.budget) {
-        resultTxt.textContent = `You are $${data.totalExp - data.budget} over your monthly expenses`;
+        resultTxt.textContent = `You are $${data.totalExp - data.budget} over your monthly budget`;
         resultTxt.classList.add('red');
         resultTxt.classList.remove('green');
     } else {
