@@ -158,6 +158,9 @@ function makeChart() {
         barColors.push(randomColor);
     };
 
+    if (pieChart) {
+        pieChart.destroy();
+    }
     pieChart = new Chart("myChart", {
         type: "pie",
         data: {
