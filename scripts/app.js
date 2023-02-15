@@ -29,7 +29,7 @@ function submit() {
     if (enterBudgInput.value) {
         budgTxt.textContent = `Your budget: $${enterBudgInput.value}`;
         data.budget = parseInt(enterBudgInput.value);
-        console.log(data);
+        saveToLocalStorage(data);
         populateTotalExp();
         submitBudgBtn.textContent = 'Update';
     }
