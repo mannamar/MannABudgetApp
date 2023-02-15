@@ -15,6 +15,7 @@ let expNameInp = document.getElementById('expNameInp');
 let expAmtInp = document.getElementById('expAmtInp');
 let addExpBtn = document.getElementById('addExpBtn');
 let expCont = document.getElementById('expCont');
+let myChart = document.getElementById('myChart');
 
 submitBudgBtn.addEventListener('click', submit);
 enterBudgInput.addEventListener('keypress', (e) => {
@@ -41,7 +42,9 @@ function calcAndPopulate() {
     if (data.expenses.length > 0) {
         makeChart();
     } else {
-        
+        // Why this no work????
+        let context = myChart.getContext('2d');
+        context.clearRect(0, 0, canvas.width, canvas.height);
     }
 };
 

@@ -63,7 +63,10 @@ h5 {
 }
 
 #myChart {
-    padding-top: 30px;
+    margin-top: 30px;
+    width: 100%;
+    max-width: 600px;
+    margin-bottom: 40px;
 }
 
 @media (max-width: 768px) {
